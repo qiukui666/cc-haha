@@ -77,7 +77,7 @@
     "xss": "^1.0.15",
     "yaml": "^2.8.3",
     "zod": "^4.3.6",
-    "turndown": "^2.1.0"
+    "turndown": "^7.2.4"
   },
   "devDependencies": {
     "mermaid": "^11.14.0",
