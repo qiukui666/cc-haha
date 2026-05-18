@@ -39,7 +39,12 @@ export async function scanMemoryFiles(
   try {
     const entries = await readdir(memoryDir, { recursive: true })
     const mdFiles = entries.filter(
-      f => f.endsWith('.md') && basename(f) !== 'MEMORY.md',
+      f =>
+        f.endsWith('.md') &&
+        basename(f) !== 'MEMORY.md' &&
+        // Skip files inside the decay archive directory
+        !f.split('/').includes('_archive') &&
+        !f.split('\\').includes('_archive'),
     )
 
     const headerResults = await Promise.allSettled(

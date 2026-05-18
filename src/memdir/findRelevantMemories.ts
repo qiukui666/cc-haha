@@ -9,6 +9,7 @@ import {
   type MemoryHeader,
   scanMemoryFiles,
 } from './memoryScan.js'
+import { recordMemoryHit } from './memoryDecay.js'
 
 export type RelevantMemory = {
   path: string
@@ -69,6 +70,13 @@ export async function findRelevantMemories(
       require('./memoryShapeTelemetry.js') as typeof import('./memoryShapeTelemetry.js')
     /* eslint-enable @typescript-eslint/no-require-imports */
     logMemoryRecallShape(memories, selected)
+  }
+
+  // Record hit counts for decay scoring — fire-and-forget
+  if (selected.length > 0) {
+    void Promise.all(
+      selected.map(m => recordMemoryHit(memoryDir, m.filePath)),
+    )
   }
 
   return selected.map(m => ({ path: m.filePath, mtimeMs: m.mtimeMs }))

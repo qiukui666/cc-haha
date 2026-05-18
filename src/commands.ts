@@ -143,6 +143,7 @@ import {
   resetLimitsNonInteractive,
 } from './commands/reset-limits/index.js'
 import antTrace from './commands/ant-trace/index.js'
+import decay from './commands/decay/index.js'
 import perfIssue from './commands/perf-issue/index.js'
 import sandboxToggle from './commands/sandbox-toggle/index.js'
 import chrome from './commands/chrome/index.js'
@@ -265,6 +266,7 @@ const COMMANDS = memoize((): Command[] => [
   compact,
   config,
   copy,
+  decay,
   desktop,
   context,
   contextNonInteractive,
